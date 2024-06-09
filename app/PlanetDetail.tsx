@@ -23,18 +23,21 @@ const PlanetDetail: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Detail Planet {planet.name}</Text>
+      </View>
       <View style={styles.card}>
         <Text style={styles.title}>{planet.name}</Text>
         <View style={styles.detailContainer}>
-          <Text style={styles.label}>Diameter:</Text>
+          <Text style={styles.label}>Diameter :</Text>
           <Text style={styles.value}>{planet.diameter}</Text>
         </View>
         <View style={styles.detailContainer}>
-          <Text style={styles.label}>Climate:</Text>
+          <Text style={styles.label}>Climate :</Text>
           <Text style={styles.value}>{planet.climate}</Text>
         </View>
         <View style={styles.detailContainer}>
-          <Text style={styles.label}>Terrain:</Text>
+          <Text style={styles.label}>Terrain :</Text>
           <Text style={styles.value}>{planet.terrain}</Text>
         </View>
         <Button title="Add to Wishlist" onPress={() => addToWishlist(planet)} />
@@ -44,6 +47,16 @@ const PlanetDetail: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  header: {
+    paddingBottom: 20,
+    backgroundColor: "#2b2e33",
+    alignItems: "center",
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#fff",
+  },
   container: {
     flexGrow: 1,
     justifyContent: "center",

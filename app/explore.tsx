@@ -8,24 +8,31 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import { useWishlist } from "./WishlistContext"; // Sesuaikan dengan lokasi WishlistContext.tsx
+import { useWishlist } from "./WishlistContext";
+
+interface Planet {
+  name: string;
+  diameter: string;
+  climate: string;
+  terrain: string;
+}
 
 const ExploreScreen: React.FC = () => {
   const { wishlist, removeFromWishlist } = useWishlist();
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: { item: Planet }) => (
     <View style={styles.card}>
       <Text style={styles.title}>{item.name}</Text>
       <View style={styles.detailContainer}>
-        <Text style={styles.label}>Diameter:</Text>
+        <Text style={styles.label}>Diameter :</Text>
         <Text style={styles.value}>{item.diameter}</Text>
       </View>
       <View style={styles.detailContainer}>
-        <Text style={styles.label}>Climate:</Text>
+        <Text style={styles.label}>Climate :</Text>
         <Text style={styles.value}>{item.climate}</Text>
       </View>
       <View style={styles.detailContainer}>
-        <Text style={styles.label}>Terrain:</Text>
+        <Text style={styles.label}>Terrain :</Text>
         <Text style={styles.value}>{item.terrain}</Text>
       </View>
       <Button
@@ -37,6 +44,9 @@ const ExploreScreen: React.FC = () => {
 
   return (
     <View style={styles.background}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Whislist</Text>
+      </View>
       <FlatList
         data={wishlist}
         keyExtractor={(item) => item.name}
@@ -51,11 +61,21 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     backgroundColor: "#2b2e33",
+    paddingTop: 60,
+    paddingBottom: 20,
+  },
+  header: {
+    alignItems: "center",
   },
   container: {
-    paddingTop: 60,
+    paddingTop: 30,
     paddingHorizontal: 20,
     backgroundColor: "#2b2e33",
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#fff",
   },
   card: {
     backgroundColor: "#fff",

@@ -9,7 +9,8 @@ import {
   SafeAreaView,
 } from "react-native";
 import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { RootStackParamList } from "./types"; // Sesuaikan dengan lokasi file types.ts
 
 // Definisikan tipe data untuk planet
 interface Planet {
@@ -23,7 +24,7 @@ const PlanetList = () => {
   const [planets, setPlanets] = useState<Planet[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   useEffect(() => {
     loadMorePlanets();
@@ -62,6 +63,9 @@ const PlanetList = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Planet List</Text>
+      </View>
       <FlatList
         data={planets}
         renderItem={renderItem}
@@ -81,14 +85,25 @@ const PlanetList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 60,
-    paddingHorizontal: 0,
     backgroundColor: "#2b2e33",
+  },
+  header: {
+    paddingTop: 50,
+    paddingBottom: 20,
+    backgroundColor: "#2b2e33",
+    alignItems: "center",
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#fff",
   },
   card: {
     backgroundColor: "#fff",
     padding: 20,
     marginBottom: 10,
+    marginHorizontal: 20,
+    borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
