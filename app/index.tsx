@@ -44,7 +44,10 @@ const PlanetList = () => {
         climate: planet.climate,
         terrain: planet.terrain,
       }));
-      setPlanets([...planets, ...newPlanets]);
+      const allPlanets = [...planets, ...newPlanets];
+      // Sort the combined array of planets alphabetically by name
+      allPlanets.sort((a, b) => a.name.localeCompare(b.name));
+      setPlanets(allPlanets);
       setPage(page + 1);
     } catch (error) {
       console.warn("Jumlah Planet Sudah Maksimal!");
